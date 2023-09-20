@@ -55,9 +55,13 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="{{ asset('admin') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                    <img src="{{ asset('admin') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                        style="opacity: .8">
+                @if (auth()->user()->role === 'admin')
+                    <span class="brand-text font-weight-light"><h5>Admin</h5></span>
+                    @else
+                    <span class="brand-text font-weight-light"><h5>Kasir</h5></span>
+                @endif                                
             </a>
 
             <!-- Sidebar -->
@@ -129,6 +133,7 @@
     <script src="{{ asset('admin') }}/dist/js/pages/dashboard.js"></script>
     {{-- DataTable --}}
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.5/datatables.min.js"></script>
+    
     @include('layout.script')
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

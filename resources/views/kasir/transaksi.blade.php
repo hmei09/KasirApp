@@ -94,21 +94,75 @@
                                 <input type="text" id="disabledTextInput" class="form-control"
                                     value="{{ ucfirst(Auth::user()->name) }}" readonly>
                                 <input type="number" id="disabledTextInput" class="form-control"
-                                    value="{{ Auth::user()->id }}" readonly name="id" hidden>                                
+                                    value="{{ Auth::user()->id }}" readonly name="id" hidden>
                             </div>
                         </div>
                         <div class="form-group row mb-2">
                             <label for="" class="form-label col-4">Meja</label>
-                            <div class="col-8">
+                            <div class="col-6">
                                 <select class="form-select" aria-label="Default select example" style="width: 100%;"
                                     name="no_meja" id="no_meja" required>
                                     <option selected disabled>Pilih No Meja</option>
                                     @foreach ($meja as $item)
-                                        <option value="{{ $item->no_meja }}">{{ $item->no_meja }}</option>
+                                        @php
+                                            $status = $item->status_meja === 'penuh' ? 'bg-danger' : '';
+                                        @endphp
+                                        <option value="{{ $item->no_meja }}" class="{{ $status }}">
+                                            {{ $item->no_meja }}</option>
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-2 d-flex align-middle pt-2">
+                                <a class="" data-toggle="modal" data-target="#exampleModal"><i
+                                        class="fa-solid fa-table"></i></a>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
 
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <th>No Meja</th>
+                                                    <th>Status</th>                                                    
+                                                </thead>
+                                    
+                                                <tbody>
+                                                    @foreach ($meja as $item)
+                                                        <tr class="">
+                                                            <td class="">{{ $item->no_meja }}</td>
+                                                            <td class="">
+                                                                <select class="form-select" id="exampleFormControlSelect1" name="status_meja"
+                                                                    style="width: 100px" data-search="true">
+                                                                    <option value="kosong"
+                                                                        {{ old('status_meja', $item->status_meja) === 'kosong' ? 'selected' : '' }}>kosong
+                                                                    </option>
+                                                                    <option value="penuh"
+                                                                        {{ old('status_meja', $item->status_meja) === 'penuh' ? 'selected' : '' }}>penuh
+                                                                    </option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                    
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" id="starButton" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <hr>
                         <table class="table">
@@ -146,8 +200,8 @@
                                 value="">
                         </div>
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="floatingnumber" placeholder="number" value="{{ old('bayar') }}"
-                                name="bayar" oninput="updateBayar(this.value)">
+                            <input type="number" class="form-control" id="floatingnumber" placeholder="number"
+                                value="{{ old('bayar') }}" name="bayar" oninput="updateBayar(this.value)">
                             <label for="floatingnumber" class="font-weight-normal">Bayar</label>
                         </div>
                         <div class="form-group">
@@ -175,6 +229,10 @@
                 <div class="">
                     <button class="btn btn-primary" onclick="confirmDeleteDetail()"><i
                             class="fa-solid fa-arrows-rotate"></i> New Transaksi</button>
+                </div>
+                <div>
+                    <a href="{{ route('struk') }}" target="_blank" class="btn btn-primary"><i
+                            class="fa-solid fa-print"></i>Struk</a>
                 </div>
                 <div class="">
                     <button class="btn btn-success" form="formPesanan"><i class="fa-solid fa-check"></i>

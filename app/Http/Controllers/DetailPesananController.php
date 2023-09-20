@@ -6,20 +6,23 @@ use App\Models\MejaModel;
 use App\Models\MenuModel;
 // use App\Models\MenuModel;
 use Illuminate\Http\Request;
+use PDF;
+
 
 class DetailPesananController extends Controller
 {
     public function index()
 {
-    $detail = DetailPesananModel::with('menu')->get();
+    $detail = DetailPesananModel::with('menu')->get();    
     // dd($detail);
     // $detail = DetailPesananModel::all();
 
-    $menu = MenuModel::all();
+    $menu = MenuModel::orderBy('created_at', 'desc')->get();
     $meja = MejaModel::all();
     
     return view('kasir.transaksi', compact('detail', 'meja', 'menu'));
 }
+
 
 public function store(Request $request)
 {
@@ -68,5 +71,15 @@ function delete($id_detail, Request $request)
     // Return a success response (you can customize this message as needed)
     return response()->json(['message' => 'Item deleted successfully.'], 200);
 }
+
+// function printPdf() {
+//     $detail = DetailPesananModel::with('menu')->get();
+//     $menu = MenuModel::all();
+//     $meja = MejaModel::all();
+    
+//     $pdf = PDF::loadView('kasir.struk', compact('detail', 'meja', 'menu'));
+
+//     return $pdf->download('struk.pdf');
+// }
 
 }

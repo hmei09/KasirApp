@@ -7,6 +7,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MejaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StrukController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -108,13 +109,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/laporan/bulanan', [PesananController::class, 'reportBulanan'])->name('bulanan');
         Route::get('/laporan/tahunan', [PesananController::class, 'reportTahunan'])->name('tahunan');
         Route::get('/delete/{id_pesanan}/pesanan', [PesananController::class, 'destroy'])->name('hapusRiwayat');
+        Route::get('/riwayat/pesanan/filter', [PesananController::class, 'filter'])->name('filter');
 
+        // print struk
+        Route::get('/tespdf', [StrukController::class, 'index'])->name('struk');
     });
 
     Route::group(['middleware' => ['CekUserLogin:kasir']], function () {
         Route::resource('transaksi', DetailPesananController::class)->names(['index'
         => 'transaksi',]);
 
+        // transaksi
         Route::view('/cek', 'kasir.transaksi')->name('cek');
         Route::get('/transaksi', [DetailPesananController::class, 'index'])->name('transaksi');
         Route::post('/add/detail', [DetailPesananController::class, 'store'])->name('tambahz');
@@ -124,6 +129,16 @@ Route::group(['middleware' => ['auth']], function () {
         // RIwayat
         Route::post('/checkout/pesanan', [PesananController::class, 'store'])->name('pesanan.checkout');
         Route::get('/riwayat/pesanan', [PesananController::class, 'index'])->name('riwayat');
+
+        // print struk
+        Route::get('/tespdf', [StrukController::class, 'index'])->name('struk');
+
+        // Meja
+        Route::get('/meja-page', [MejaController::class, 'index'])->name('meja');
+        // Route::post('/input/meja', [MejaController::class, 'store'])->name('add');
+        Route::post('/update-status-meja', [MejaController::class, 'updateStatusMeja'])->name('update-status-meja');
+        Route::get('/delete/no_meja/meja', [MejaController::class, 'destroy'])->name('delete');
+        
     });
 
     

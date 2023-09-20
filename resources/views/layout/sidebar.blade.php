@@ -45,13 +45,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Menu</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('meja') }}" class="nav-link @yield('active-meja')">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Meja</p>
-                            </a>
-                        </li>
+                        </li>                        
                         <li class="nav-item">
                             <a href="{{ route('user') }}" class="nav-link @yield('active-user')">
                                 <i class="far fa-circle nav-icon"></i>
@@ -88,6 +82,12 @@
                             <a href="{{ route('riwayat') }}" class="nav-link @yield('active-riwayat')">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Riwayat</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('meja') }}" class="nav-link @yield('active-meja')">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Meja</p>
                             </a>
                         </li>
                     </ul>

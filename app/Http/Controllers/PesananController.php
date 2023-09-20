@@ -8,11 +8,23 @@ use Illuminate\Http\Request;
 
 class PesananController extends Controller
 {
-    public function index()
-    {
-        $view = PesananModel::with('meja','user')->get();
-        return view('kasir.riwayat', compact('view'));
-    }
+        public function index()
+        {
+            $view = PesananModel::with('meja','user')->orderByDesc('created_at')->get();
+            return view('kasir.riwayat', compact('view'));
+            
+        }
+
+        public function filter(Request $request) {
+            $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        // Lakukan validasi data input sesuai kebutuhan Anda
+
+        $filteredData = PesananModel::whereBetween('tgl_pesanan', [$start_date, $end_date])->get();
+            return view('kasir.riwayat-filter', ['filteredData' => $filteredData]);
+        }
+
     public function report()
     {
         $report = PesananModel::all();

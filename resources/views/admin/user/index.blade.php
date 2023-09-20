@@ -66,7 +66,7 @@
                 <th>#</th>
                 <th>Nama</th>
                 <th>Username</th>
-                <th>Password</th>
+                {{-- <th>Password</th> --}}
                 <th>Role</th>
                 <th>Action</th>
             </thead>
@@ -77,12 +77,12 @@
                         <td class="">{{ $number + 1 }}</td>
                         <td class="">{{ $item->name }}</td>
                         <td class="">{{ $item->username }}</td>
-                        <td class="">{{ str_pad(str_repeat('•', min(strlen($item->password), 8)), 8, '•') }}</td>
+                        {{-- <td class="">{{ str_pad(str_repeat('•', min(strlen($item->password), 8)), 8, '•') }}</td> --}}
                         {{-- <td class="">{{ str_repeat('•', strlen($item->password)) }}</td> --}}
                         <td class="">{{ $item->role }}</td>
                         <td class="">
-                            <a href="" class="text-white btn bg-success btn-hover-effect" data-toggle="modal"
-                                data-target="#info-{{ $item->id }}"><i class="fa fa-eye"></i></a>
+                            {{-- <a href="" class="text-white btn bg-success btn-hover-effect" data-toggle="modal"
+                                data-target="#info-{{ $item->id }}"><i class="fa fa-eye"></i></a> --}}
                             <a href="/edit/{{ $item->id }}/user"
                                 class="text-white btn bg-warning btn-hover-effect"><i class="fa fa-edit"></i></a>
 
@@ -109,7 +109,7 @@
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>Username</th>
-                                            <th>Password</th>
+                                            {{-- <th>Password</th> --}}
                                             <th>Role</th>
                                         </thead>
                                         <tbody>
@@ -117,7 +117,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->username }}</td>
-                                                <td>{{ $item->password }}</td>
+                                                {{-- <td>{{ $item->password }}</td> --}}
                                                 <td>{{ $item->role }}</td>
                                             </tr>
                                         </tbody>

@@ -595,13 +595,15 @@
 </script>
 
 
-
-
-
-
-
-
-
+<script>
+    $(document).ready(function () {
+        // Menambahkan event click ke tombol "star"
+        $("#starButton").click(function () {
+            // Melakukan refresh halaman
+            location.reload();
+        });
+    });
+</script>
 
 
 
