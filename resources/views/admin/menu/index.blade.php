@@ -33,7 +33,7 @@
 
             <tbody>
                 @foreach ($data as $number => $item)
-                    <tr class="" >
+                    <tr class="">
                         <td class="">{{ $number + 1 }}</td>
                         <td class="">{{ ucfirst($item->nama_menu) }}</td>
                         <td class="">{{ ucfirst($item->tipe) }}</td>
